@@ -1,3 +1,5 @@
+const { Artist } = require('../models');
+
 exports.create = (req, res) => {
-  res.sendStatus(201);
+  Artist.create(req.body).then((user) => res.status(201).json(user));
 };
