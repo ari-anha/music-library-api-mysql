@@ -41,3 +41,31 @@ exports.getAlbumById = (req, res) => {
     }
   });
 };
+
+exports.updateAlbum = (req, res) => {
+  const { artistId } = req.params;
+  const { albumId } = req.params;
+  Artist.findByPk(artistId).then((artist) => {
+    if (!artist) {
+      res.status(404).json({ error: 'The artist could not be found.' });
+    } else {
+      Album.update(req.body, { where: { id: albumId } }).then(([updates]) => {
+        res.status(200).json(updates);
+      });
+    }
+  });
+};
+
+exports.deleteAlbum = (req, res) => {
+  const { artistId } = req.params;
+  const { albumId } = req.params;
+  Artist.findByPk(artistId).then((artist) => {
+    if (!artist) {
+      res.status(404).json({ error: 'The artist could not be found.' });
+    } else {
+      Album.destroy({ where: { id: albumId } }).then(() => {
+        res.status(200).send();
+      });
+    }
+  });
+};
