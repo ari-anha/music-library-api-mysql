@@ -3,7 +3,7 @@ const { expect } = require('chai');
 const request = require('supertest');
 const app = require('../src/app');
 const { Artist, Album, Song } = require('../src/models');
-/*
+
 describe('/songs', () => {
   let artist;
   let album;
@@ -57,4 +57,3 @@ describe('/songs', () => {
     });
   });
 });
-*/
