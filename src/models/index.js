@@ -13,7 +13,7 @@ const {
 } = process.env;
 
 const setupDatabase = () => {
-  const sequelize = CLEARDB_DATABASE_URL
+  const connection = CLEARDB_DATABASE_URL
     ? new Sequelize(CLEARDB_DATABASE_URL)
     : new Sequelize(DB_NAME, DB_USER, DB_PASSWORD, {
         host: DB_HOST,
@@ -22,15 +22,15 @@ const setupDatabase = () => {
         logging: false,
       });
 
-  const Artist = ArtistModel(sequelize, Sequelize);
-  const Album = AlbumModel(sequelize, Sequelize);
-  const Song = SongModel(sequelize, Sequelize);
+  const Artist = ArtistModel(connection, Sequelize);
+  const Album = AlbumModel(connection, Sequelize);
+  const Song = SongModel(connection, Sequelize);
 
   Album.belongsTo(Artist, { as: 'artist' });
   Song.belongsTo(Artist, { as: 'artist' });
   Song.belongsTo(Album, { as: 'album' });
 
-  sequelize.sync({ alter: true });
+  connection.sync({ alter: true });
   return {
     Artist,
     Album,
