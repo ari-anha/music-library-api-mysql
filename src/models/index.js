@@ -38,4 +38,4 @@ const setupDatabase = () => {
   };
 };
 
-module.exports = setupDatabase;
+module.exports = setupDatabase();
